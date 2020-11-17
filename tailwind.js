@@ -133,6 +133,17 @@ module.exports = {
         800: '#97266d',
         900: '#702459',
       },
+      custom: {
+        custom1: '#f9423a',
+        custom2: '#a23530',
+        custom3: '#424749',
+        custom4: '#6e7679',
+        custom5: '#e2e4e4',
+        custom6: '#f1f1f2',
+        custom7: '#ffffff',
+        custom8: '#000000',
+
+      }
     },
     spacing: {
       px: '1px',

@@ -1,15 +1,14 @@
 import { createStore, applyMiddleware, compose } from 'redux'
 import { Provider } from 'react-redux'
-import { BrowserRouter as Router } from 'react-router-dom'
+import { BrowserRouter as Router, Switch } from 'react-router-dom'
 import thunkMiddleware from 'redux-thunk'
 import rootReducer from './reducers'
-
-import logo from './logo.svg';
-import './App.css';
 
 import loggerMiddleware from './utils/logger';
 import monitorReducerEnhancer from './utils/monitorReducer';
 import history from './utils/browserHistory'
+import AppRoutes from './routes'
+import CustomRoute from './components/Route'
 
 function App() {
 
@@ -18,26 +17,22 @@ function App() {
   const store = createStore(rootReducer, undefined, composedEnhancers)
 
   return (
-    <Provider store={store}>
-      <Router history={history}>
-        <div className="App">
-          <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <p>
-              Edit <code>src/App.js</code> and save to reload.
-        </p>
-            <a
-              className="App-link"
-              href="https://reactjs.org"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learn React
-        </a>
-          </header>
-        </div>
-      </Router>
-    </Provider>
+    <div className="bg-gray-300">
+      <Provider store={store}>
+        <Router history={history}>
+          <Switch>
+            {AppRoutes.map(({ path, component }, key) =>
+              <CustomRoute
+                exact
+                path={path}
+                component={component}
+                key={key}
+              />
+            )}
+          </Switch>
+        </Router>
+      </Provider>
+    </div>
   );
 }
 
