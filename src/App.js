@@ -1,12 +1,12 @@
 import { createStore, applyMiddleware, compose } from 'redux'
 import { Provider } from 'react-redux'
-import { BrowserRouter as Router, Switch } from 'react-router-dom'
+import { Router, Switch } from 'react-router-dom'
 import thunkMiddleware from 'redux-thunk'
 import rootReducer from './reducers'
 
 import loggerMiddleware from './utils/logger';
 import monitorReducerEnhancer from './utils/monitorReducer';
-import history from './utils/browserHistory'
+import history from './utils/history'
 import AppRoutes from './routes'
 import CustomRoute from './components/Route'
 

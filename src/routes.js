@@ -7,7 +7,7 @@ const AppRoutes = [
         component: DefaultPage
     },
     {
-        path: '/detail-page',
+        path: '/detail-page/:params',
         component: DetailPage
     },
 ]
