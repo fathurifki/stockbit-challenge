@@ -1,7 +1,8 @@
 import * as React from 'react';
 import history from '../../utils/history'
+import image from '../../assets/images';
 
-const Header = ({ isShowHeader, path}) => {
+const Header = ({ isShowHeader, path }) => {
     const showHeader = path.toString() === "HOME"
 
     return (
@@ -17,8 +18,7 @@ const Header = ({ isShowHeader, path}) => {
                     !showHeader &&
                     <>
                         <div className="cursor-pointer flex flex-col justify-center items-center px-6">
-                            <button onClick={() => history.push('/home')}>Back</button>
-                            {/* <img src={image.back} width={20} alt="icon"></img> */}
+                            <img onClick={() => history.push('/home')} src={image.back} width={20} alt="icon"></img>
                         </div>
                         <span className="font-bold flex flex-col justify-center">{path}</span>
                     </>
