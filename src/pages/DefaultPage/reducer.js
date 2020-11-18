@@ -3,6 +3,7 @@ import { SET_DATA, SET_LOADING, SET_ERROR } from './constants';
 const initialState = {
     isLoading: false,
     data: [],
+    dataRender: [],
     dataDetail: {},
     error: "",
     searchInput: "", 

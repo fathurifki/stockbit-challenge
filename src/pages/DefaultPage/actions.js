@@ -32,6 +32,20 @@ export const fetchingData = (search) => (dispatch, getState) => {
         .then(response => {
             const { data: { Search } } = response
             dispatch(setLoading(false))
+            dispatch(setData('dataRender', Search))
+        })
+        .catch(error => {
+            dispatch(setErrors(error))
+        })
+}
+
+export const searchData = (search) => (dispatch, getState) => {
+    console.log('SEARCH', search)
+    dispatch(setLoading(true))
+    axiosApi.get(`?apikey=${apiKey}&s=${search}`)
+        .then(response => {
+            const { data: { Search } } = response
+            dispatch(setLoading(false))
             dispatch(setData('data', Search))
         })
         .catch(error => {
@@ -47,6 +61,7 @@ export const fetchingDetailData = (id) => (dispatch, getState) => {
             const { data } = response
             dispatch(setLoading(false))
             dispatch(setData('dataDetail', data))
+            
         })
         .catch(error => {
             dispatch(setErrors(error))
