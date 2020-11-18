@@ -106,7 +106,7 @@ const DefaultPage = () => {
         <div p-4>
             <div className="flex flex-row justify-center h-3/4">
                 <div className="flex flex-col w-1/2 pt-4">
-                    <AutoSearch data={transformResult} handleChange={(e) => handleInput(e)} value={state.search} />
+                    <AutoSearch placeholder="Search Movie" data={transformResult} handleChange={(e) => handleInput(e)} value={state.search} />
                 </div>
                 <div className="flex flex-col w-1/4 justify-center items-center mt-2">
                     <button onClick={() => searchAction()} className="font-bold">Search</button>

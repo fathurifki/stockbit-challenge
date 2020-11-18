@@ -3,7 +3,7 @@ import React from 'react'
 export const ModalInfo = ({ src, onClick }) => {
     return (
         <>
-            <button onClick={onClick}>
+            <button id="buttonModal" onClick={onClick}>
                 <div className="max-w-md m-auto">
                     <div className="justify-center items-center flex absolute inset-0 z-50">
                         <div className="relative w-auto my-6 mx-auto max-w-3xl">

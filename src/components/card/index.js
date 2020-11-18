@@ -6,6 +6,7 @@ export const Card = ({ onClick, srcImage, altTitle, onClickPage, year, type, tit
         <React.Fragment>
             <div className="flex max-w-md bg-white shadow-lg rounded-lg overflow-hidden">
                 <img
+                    id="imageCover"
                     onClick={onClick}
                     className="cursor-pointer w-1/3 bg-cover object-cover "
                     src={srcImage !== 'N/A' ? srcImage : image.defaultImage}
