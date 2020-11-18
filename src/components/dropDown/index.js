@@ -3,7 +3,6 @@ import ReactSearchBox from 'react-search-box'
 
 const AutoSearch = (props) => {
     const { data, handleChange, onSelect, value, placeholder } = props
-    console.log('DATA COMPONENT', data)
     return (
         <ReactSearchBox
             placeholder={placeholder}

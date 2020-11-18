@@ -1,6 +1,6 @@
 import { createStore, applyMiddleware, compose } from 'redux'
 import { Provider } from 'react-redux'
-import { Router, Switch } from 'react-router-dom'
+import { Router, Switch, Redirect } from 'react-router-dom'
 import thunkMiddleware from 'redux-thunk'
 import rootReducer from './reducers'
 
@@ -29,6 +29,7 @@ function App() {
                 key={key}
               />
             )}
+            <Redirect from="/" to={{ pathname: "/home" }} />
           </Switch>
         </Router>
       </Provider>

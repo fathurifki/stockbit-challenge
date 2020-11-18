@@ -2,7 +2,7 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchingDetailData } from '../DefaultPage/actions'
+import { fetchingDetailData } from '../../modules/DefaultPage/actions'
 
 const DetailPage = () => {
     const params = useParams()
@@ -88,7 +88,7 @@ const DetailPage = () => {
                 <p className="text-lg text-justify">{Production}</p>
             </div>
 
-            <div className="flex flex-row justify-center items-center space-x-10 mt-4 bg-red-200">
+            <div className="flex flex-row justify-center items-center space-x-10 mt-4">
                 <div className="flex flex-col items-center justify-center">
                     <p className="font-bold">Rated</p>
                     <p className="font-bold">{Rated}</p>
