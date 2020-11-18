@@ -11,16 +11,15 @@ const CustomRoute = ({ component: Component, ...rest }) => {
     const regexPath = new RegExp('\\w+', 'g')
     const newPath = regexPath.exec(rest.path)?.map((val) => val.toUpperCase().toString())
 
-
     return (
-        <div className="h-screen m-auto max-w-md bg-custom-custom7">
+        <div className="h-full m-auto max-w-md bg-custom-custom7">
             <div className="flex flex-col h-screen">
                 <div className="flex flex-col h-screen">
                     <Header
                         isShowHeader={isShowHeader}
                         path={newPath}
                     />
-                    <div className="w-full overflow-auto h-screen">
+                    <div id="scrollableDiv" className="w-full overflow-auto h-full">
                         <Router history={history}>
                             <Route {...rest} render={(props) => {
                                 return <Component {...props} />

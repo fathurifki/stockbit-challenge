@@ -6,6 +6,7 @@ const initialState = {
     dataRender: [],
     dataDetail: {},
     error: "",
+    dataLength: "",
     searchInput: "", 
 }
 

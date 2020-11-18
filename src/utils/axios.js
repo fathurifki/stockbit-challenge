@@ -1,6 +1,5 @@
 import axios from 'axios'
 
-const apiKey = "faf7e5bb"
 const url = `https://omdbapi.com/`
 
 const axiosApi = axios.create({

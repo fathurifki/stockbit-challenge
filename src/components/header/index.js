@@ -17,7 +17,7 @@ const Header = ({ isShowHeader, path}) => {
                     !showHeader &&
                     <>
                         <div className="cursor-pointer flex flex-col justify-center items-center px-6">
-                            <button onClick={() => history.push}>Back</button>
+                            <button onClick={() => history.push('/home')}>Back</button>
                             {/* <img src={image.back} width={20} alt="icon"></img> */}
                         </div>
                         <span className="font-bold flex flex-col justify-center">{path}</span>

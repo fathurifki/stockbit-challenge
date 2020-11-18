@@ -25,14 +25,15 @@ export const setLoading = (status) => {
     };
 }
 
-export const fetchingData = (search) => (dispatch, getState) => {
-    console.log('SEARCH', search)
+export const fetchingData = (search, page) => (dispatch, getState) => {
     dispatch(setLoading(true))
-    axiosApi.get(`?apikey=${apiKey}&s=${search}`)
+    axiosApi.get(`?apikey=${apiKey}&s=${search}&page=${page}`)
         .then(response => {
-            const { data: { Search } } = response
+            const { data: { Search, totalResults } } = response
             dispatch(setLoading(false))
             dispatch(setData('dataRender', Search))
+            dispatch(setData('dataLength', totalResults))
+
         })
         .catch(error => {
             dispatch(setErrors(error))
@@ -40,7 +41,6 @@ export const fetchingData = (search) => (dispatch, getState) => {
 }
 
 export const searchData = (search) => (dispatch, getState) => {
-    console.log('SEARCH', search)
     dispatch(setLoading(true))
     axiosApi.get(`?apikey=${apiKey}&s=${search}`)
         .then(response => {

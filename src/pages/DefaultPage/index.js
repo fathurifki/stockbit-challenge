@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchingData, setData, searchData } from './actions'
@@ -6,17 +7,21 @@ import { useDebounce } from 'use-debounce';
 import { ModalInfo } from '../../components/modal'
 import AutoSearch from '../../components/dropDown';
 import image from '../../assets/images';
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 const DefaultPage = () => {
+    
+    const fetching = useSelector(state => state.default.data)
+    const fetchingRender = useSelector(state => state.default.dataRender)
+    const resultLength = useSelector(state => state.default.dataLength)
 
     const initialState = {
         modal: false,
         pictureSelect: "",
         search: "",
+        count: 1,
+        items: Array.from({ length: Number(resultLength) })
     }
-
-    const fetching = useSelector(state => state.default.data)
-    const fetchingRender = useSelector(state => state.default.dataRender)
 
     const transformResult = fetching && fetching.map((v, i) => {
         return {
@@ -29,8 +34,6 @@ const DefaultPage = () => {
 
     const dispatch = useDispatch()
     const [state, setState] = React.useState(initialState)
-    const [message, setMessage] = React.useState("")
-    const [status, setStatus] = React.useState(false)
     const debouncedSearchTerm = useDebounce(search, 40);
 
     React.useEffect(() => {
@@ -62,24 +65,24 @@ const DefaultPage = () => {
     }
 
     const searchAction = () => {
-        dispatch(fetchingData(state.search))
+        dispatch(fetchingData(state.search, state.count))
     }
 
+    const fetchMoreData = () => {
+        // a fake async api call like which sends
+        // 20 more records in 1.5 secs
+        dispatch(fetchingData(state.search, state.count))
+        setTimeout(() => {
+            setState((prevState) => ({
+                ...prevState,
+                items: state.items.concat(Array.from({ length: resultLength })),
+                count: state.count +1
+            }))
+        }, 1500);
+    };
+
+
     const renderComponent = fetchingRender && fetchingRender.map((v, i) => {
-        const imageSource = v.Poster
-
-        const checkingFetchImage = (val) => {
-            fetch(val, { method: 'HEAD' })
-                .then(res => {
-                    if (res.ok) {
-                        setMessage('Image Exist')
-                    } else {
-                        setStatus(true)
-                    }
-                }).catch(err => setMessage(err));
-        }
-
-        checkingFetchImage(imageSource)
 
         return (
             <React.Fragment key={i}>
@@ -117,8 +120,7 @@ const DefaultPage = () => {
     })
 
     return (
-        <div>
-
+        <div p-4>
             <div className="flex flex-row justify-center">
                 <div className="flex flex-col w-1/2 pt-4">
                     <AutoSearch data={transformResult} handleChange={(e) => handleInput(e)} value={state.search} />
@@ -128,9 +130,17 @@ const DefaultPage = () => {
                 </div>
             </div>
 
-            <div className="space-y-4 mx-2 mt-4">
-                {renderComponent}
-            </div>
+            <InfiniteScroll
+                dataLength={state.items.length}
+                next={() => fetchMoreData()}
+                hasMore={true}
+                style={{ display: 'flex' }}
+                scrollableTarget="scrollableDiv"
+            >
+                <div className="space-y-4 mx-2 mt-6">
+                    {renderComponent}
+                </div>
+            </InfiniteScroll>
         </div >
     )
 }
